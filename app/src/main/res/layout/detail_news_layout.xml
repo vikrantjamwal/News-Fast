@@ -17,7 +17,11 @@
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
+        android:paddingStart="16dp"
+        android:textColor="#777"
+        android:fontFamily="sans-serif-medium"
+        android:paddingEnd="16dp"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textAppearance="?android:textAppearanceLarge" />
 
 </LinearLayout>
