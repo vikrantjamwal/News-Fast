@@ -1,8 +1,8 @@
 package com.app.vik.newsfast;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -63,9 +63,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_favourite) {
-            Snackbar.make(
-                    (this.findViewById(android.R.id.content)),
-                    "Open Favourite Activity", Snackbar.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity.this, FavouriteNewsActivity.class);
+            startActivity(intent);
+//            Snackbar.make(
+//                    (this.findViewById(android.R.id.content)),
+//                    "Open Favourite Activity", Snackbar.LENGTH_LONG).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

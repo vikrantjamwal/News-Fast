@@ -18,8 +18,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewsDetailActivity"
+        <activity
+            android:name=".NewsDetailActivity"
             android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <provider
+            android:name=".data.NewsProvider"
+            android:authorities="com.app.vik.newsfast"
+            android:exported="false" />
+
+        <activity
+            android:name=".FavouriteNewsActivity"
+            android:label="@string/favourites"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/MyTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
