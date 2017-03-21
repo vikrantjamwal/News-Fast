@@ -23,6 +23,7 @@ public class NewsContract {
         public final static String COLUMN_NEWS_DESCRIPTION = "description";
         public final static String COLUMN_NEWS_URL = "url";
         public final static String COLUMN_NEWS_IMAGE_URL = "img";
+
     }
 
 }
