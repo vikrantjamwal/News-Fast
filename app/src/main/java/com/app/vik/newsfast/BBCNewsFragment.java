@@ -48,17 +48,17 @@ public class BBCNewsFragment extends Fragment {
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
         mRecyclerView.addItemDecoration(itemDecoration);
 
-        if(savedInstanceState != null && !savedInstanceState.getParcelableArrayList(ARTICLE_KEY).isEmpty()){
-            mArticles = savedInstanceState.getParcelableArrayList(ARTICLE_KEY);
-            mNewsArticleAdapter.setNewsArticles(mArticles);
-            mProgressBar.setVisibility(View.GONE);
-        }else {
-            if(Utility.isNetworkAvailable(getActivity())) {
-                loadArticles();
-            }else {
+        if(Utility.isNetworkAvailable(getActivity())){
+            if(savedInstanceState != null){
+                mArticles = savedInstanceState.getParcelableArrayList(ARTICLE_KEY);
+                mNewsArticleAdapter.setNewsArticles(mArticles);
                 mProgressBar.setVisibility(View.GONE);
-                mEmptyTextView.setVisibility(View.VISIBLE);
+            }else {
+                loadArticles();
             }
+        }else {
+            mProgressBar.setVisibility(View.GONE);
+            mEmptyTextView.setVisibility(View.VISIBLE);
         }
 
         return rootView;

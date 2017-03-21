@@ -1,13 +1,15 @@
 package com.app.vik.newsfast;
 
-import android.database.Cursor;
-import android.os.Bundle;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.app.vik.newsfast.data.NewsContract.NewsEntry;
 
@@ -18,12 +20,16 @@ public class FavouriteNewsActivity extends AppCompatActivity implements LoaderMa
     private RecyclerView mRecyclerView;
     private FavouriteNewsAdapter mAdapter;
 
+    private TextView mEmptyText;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_news);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.fav_rv);
+        mEmptyText = (TextView) findViewById(R.id.no_data_tv);
         mAdapter = new FavouriteNewsAdapter(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, Utility.calculateNoOfColumns(this));
         mRecyclerView.setLayoutManager(gridLayoutManager);
@@ -49,6 +55,11 @@ public class FavouriteNewsActivity extends AppCompatActivity implements LoaderMa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if(data.getCount() == 0 ){
+            mEmptyText.setVisibility(View.VISIBLE);
+        }else {
+            mEmptyText.setVisibility(View.INVISIBLE);
+        }
         mAdapter.swapCursor(data);
     }
 

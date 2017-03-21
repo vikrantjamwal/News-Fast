@@ -11,6 +11,13 @@
         android:clipToPadding="false"
         android:padding="@dimen/item_offset" />
 
-
+    <TextView
+        android:id="@+id/no_data_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_data"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:visibility="gone" />
 
 </RelativeLayout>
