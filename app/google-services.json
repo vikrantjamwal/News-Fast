@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "356499768285",
+    "firebase_url": "https://news-fast.firebaseio.com",
+    "project_id": "news-fast",
+    "storage_bucket": "news-fast.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356499768285:android:1786900ab74fe348",
+        "android_client_info": {
+          "package_name": "com.app.vik.newsfast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356499768285-hofptpbamgddsh6b3id1v118cfe7gmhf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYdXhsPIXvps8ijdKS1wZhNpQe2a4bZvM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

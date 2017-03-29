@@ -10,6 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.app.vik.newsfast.adapters.NewsArticleAdapter;
+import com.app.vik.newsfast.network.ApiClient;
+import com.app.vik.newsfast.network.ApiInterface;
+import com.app.vik.newsfast.pojo.Article;
+import com.app.vik.newsfast.pojo.Result;
+import com.app.vik.newsfast.utils.ItemOffsetDecoration;
+import com.app.vik.newsfast.utils.Utility;
 
 import java.util.ArrayList;
 
@@ -51,8 +60,13 @@ public class TimeNewsFragment extends Fragment {
         if(Utility.isNetworkAvailable(getActivity())){
             if(savedInstanceState != null){
                 mArticles = savedInstanceState.getParcelableArrayList(ARTICLE_KEY);
-                mNewsArticleAdapter.setNewsArticles(mArticles);
-                mProgressBar.setVisibility(View.GONE);
+                assert mArticles != null;
+                if(!mArticles.isEmpty()) {
+                    mNewsArticleAdapter.setNewsArticles(mArticles);
+                    mProgressBar.setVisibility(View.GONE);
+                }else {
+                    loadArticles();
+                }
             }else {
                 loadArticles();
             }
@@ -66,7 +80,7 @@ public class TimeNewsFragment extends Fragment {
 
     private void loadArticles(){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Result> call = apiInterface.getNewsArticles("time", "e2d41ec29c9344a786104f5b19ed31ef");
+        Call<Result> call = apiInterface.getNewsArticles("time", ApiClient.API_KEY);
         call.enqueue(new Callback<Result>() {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
@@ -82,7 +96,10 @@ public class TimeNewsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
-
+                if (isAdded()) {
+                    mProgressBar.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), "Couldn't Connect To Server! Please Try Again", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

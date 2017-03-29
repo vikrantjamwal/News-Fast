@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.app.vik.newsfast.adapters.NewsListAdapter;
+import com.app.vik.newsfast.pojo.Source;
+import com.app.vik.newsfast.utils.Utility;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -23,13 +27,15 @@ public class AllNewsListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private NewsListAdapter mNewsListAdapter;
     private ProgressBar mProgressBar;
+    private TextView mEmptyTextView;
 
     ArrayList<Source> mSources = new ArrayList<>();
+
+    private static final String LIST_KEY = "list_key";
 
     public AllNewsListFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,18 +44,41 @@ public class AllNewsListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_all_news_list, container, false);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.all_news_rv);
+        mEmptyTextView = (TextView) rootView.findViewById(R.id.empty_tv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mProgressBar = (ProgressBar) rootView.findViewById(R.id.loading_spinner);
         mNewsListAdapter = new NewsListAdapter(getActivity());
         mRecyclerView.setAdapter(mNewsListAdapter);
 
-        new FetchNewsSources().execute();
+        if (Utility.isNetworkAvailable(getActivity())) {
+            if (savedInstanceState != null) {
+                mSources = savedInstanceState.getParcelableArrayList(LIST_KEY);
+                assert mSources != null;
+                if(!mSources.isEmpty()) {
+                    mNewsListAdapter.setNewsList(mSources);
+                    mProgressBar.setVisibility(View.GONE);
+                }else {
+                    new FetchNewsSources().execute();
+                }
+            } else {
+                new FetchNewsSources().execute();
+            }
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+            mEmptyTextView.setVisibility(View.VISIBLE);
+        }
 
         return rootView;
     }
 
-    public class FetchNewsSources extends AsyncTask<Void, Void, ArrayList<Source>>{
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(LIST_KEY, mSources);
+    }
+
+    public class FetchNewsSources extends AsyncTask<Void, Void, ArrayList<Source>> {
 
         @Override
         protected ArrayList<Source> doInBackground(Void... voids) {
@@ -72,10 +101,10 @@ public class AllNewsListFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArrayList<Source> sources) {
-            if(sources != null && !sources.isEmpty()){
-                Log.e("TAG", sources.get(0).getName());
+            if (sources != null && !sources.isEmpty()) {
                 mProgressBar.setVisibility(View.INVISIBLE);
-                mNewsListAdapter.setNewsList(sources);
+                mSources = sources;
+                mNewsListAdapter.setNewsList(mSources);
             }
         }
     }

@@ -15,7 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        MobileAds.initialize(this, getResources().getString(R.string.banner_ad_unit_id));
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
     }
 
     @Override
@@ -65,9 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_favourite) {
             Intent intent = new Intent(MainActivity.this, FavouriteNewsActivity.class);
             startActivity(intent);
-//            Snackbar.make(
-//                    (this.findViewById(android.R.id.content)),
-//                    "Open Favourite Activity", Snackbar.LENGTH_LONG).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -107,15 +119,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "All";
+                    return getString(R.string.all);
                 case 1:
-                    return "BBC";
+                    return getString(R.string.bbc);
                 case 2:
-                    return "CNN";
+                    return getString(R.string.cnn);
                 case 3:
-                    return "Newsweek";
+                    return getString(R.string.newsweek);
                 case 4:
-                    return "Time";
+                    return getString(R.string.time);
             }
             return null;
         }

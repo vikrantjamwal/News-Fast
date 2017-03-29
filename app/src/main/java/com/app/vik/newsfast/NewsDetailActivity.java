@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.vik.newsfast.data.NewsContract.NewsEntry;
+import com.app.vik.newsfast.pojo.Article;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -83,7 +85,8 @@ public class NewsDetailActivity extends AppCompatActivity {
 
                 Palette.PaletteAsyncListener paletteListener = new Palette.PaletteAsyncListener() {
                     public void onGenerated(Palette palette) {
-                        mTitle.setBackgroundColor(palette.getDominantColor(0x000000));
+                        mTitle.setBackgroundColor(palette.getDominantColor(Color.BLACK));
+                        mTitle.setTextColor(Color.WHITE);
                     }
                 };
 

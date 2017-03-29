@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.widget.RemoteViews;
@@ -17,6 +18,8 @@ import com.app.vik.newsfast.R;
  * Implementation of App Widget functionality.
  */
 public class CollectionWidget extends AppWidgetProvider {
+
+    SharedPreferences sharedPrefer;
 
     private static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                         int appWidgetId) {
@@ -37,12 +40,31 @@ public class CollectionWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
 
-        for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
+        for (int i=0; i<appWidgetIds.length; i++) {
+            sharedPrefer=context.getSharedPreferences("TaskWidget", 0);
+            SharedPreferences.Editor editor=sharedPrefer.edit();
+            editor.putInt("widget_key", appWidgetIds[i]);
+            editor.commit();
+
+            updateAppWidget(context, appWidgetManager, appWidgetIds[i]);
         }
 
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+
+        String action = intent.getAction();
+
+        if(action.equals("android.appwidget.action.APPWIDGET_UPDATE")){
+            int[] appid=new int[1];
+            sharedPrefer=context.getSharedPreferences("TaskWidget", 0);
+            appid[0]=sharedPrefer.getInt("widget_key",0);
+            onUpdate(context, AppWidgetManager.getInstance(context),appid);
+        }
     }
 
     @Override

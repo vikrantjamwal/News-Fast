@@ -3,13 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:orientation="vertical"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp">
+    android:paddingEnd="@dimen/general_padding"
+    android:paddingLeft="@dimen/general_padding"
+    android:paddingRight="@dimen/general_padding"
+    android:paddingStart="@dimen/general_padding">
 
     <TextView
         android:id="@+id/widget_text_view"
+        android:textSize="@dimen/widget_tv_size"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical" />
+        android:layout_gravity="center_vertical" />
 
 </LinearLayout>

@@ -1,9 +1,12 @@
-package com.app.vik.newsfast;
+package com.app.vik.newsfast.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
+
+import com.app.vik.newsfast.R;
+import com.app.vik.newsfast.pojo.Source;
 
 import org.json.JSONArray;
 import org.json.JSONException;

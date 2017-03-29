@@ -1,4 +1,4 @@
-package com.app.vik.newsfast;
+package com.app.vik.newsfast.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.vik.newsfast.pojo.Article;
+import com.app.vik.newsfast.NewsDetailActivity;
+import com.app.vik.newsfast.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -39,7 +42,7 @@ public class NewsArticleAdapter extends RecyclerView.Adapter<NewsArticleAdapter.
 
     @Override
     public void onBindViewHolder(ArticleViewHolder holder, int position) {
-        Glide.with(mContext).load(mArticles.get(position).getUrlToImage()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.mNewsImage);
+        Glide.with(mContext).load(mArticles.get(position).getUrlToImage()).placeholder(R.drawable.placeholder_pink).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.mNewsImage);
         holder.mNewsTextView.setText(mArticles.get(position).getTitle());
     }
 

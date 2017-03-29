@@ -1,4 +1,4 @@
-package com.app.vik.newsfast;
+package com.app.vik.newsfast.utils;
 
 import android.content.Context;
 import android.graphics.Rect;

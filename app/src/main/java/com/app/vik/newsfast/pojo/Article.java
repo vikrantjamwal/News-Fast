@@ -1,4 +1,4 @@
-package com.app.vik.newsfast;
+package com.app.vik.newsfast.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

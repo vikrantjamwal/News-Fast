@@ -1,4 +1,4 @@
-package com.app.vik.newsfast;
+package com.app.vik.newsfast.adapters;
 
 
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.vik.newsfast.NewsDetailActivity;
+import com.app.vik.newsfast.R;
 import com.app.vik.newsfast.data.NewsContract.NewsEntry;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -38,7 +40,7 @@ public class FavouriteNewsAdapter extends RecyclerView.Adapter<FavouriteNewsAdap
         String imgUrl = mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_IMAGE_URL));
         String title = mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_TITLE));
 
-        Glide.with(mContext).load(imgUrl).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.mNewsImage);
+        Glide.with(mContext).load(imgUrl).placeholder(R.drawable.placeholder_pink).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.mNewsImage);
         holder.mNewsTextView.setText(title);
     }
 
@@ -48,7 +50,7 @@ public class FavouriteNewsAdapter extends RecyclerView.Adapter<FavouriteNewsAdap
         return mCursor.getCount();
     }
 
-    void swapCursor(Cursor newCursor) {
+    public void swapCursor(Cursor newCursor) {
         mCursor = newCursor;
 
         notifyDataSetChanged();

@@ -1,4 +1,6 @@
-package com.app.vik.newsfast;
+package com.app.vik.newsfast.network;
+
+import com.app.vik.newsfast.pojo.Result;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

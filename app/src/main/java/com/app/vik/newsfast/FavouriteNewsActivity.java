@@ -2,16 +2,21 @@ package com.app.vik.newsfast;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.app.vik.newsfast.adapters.FavouriteNewsAdapter;
 import com.app.vik.newsfast.data.NewsContract.NewsEntry;
+import com.app.vik.newsfast.utils.ItemOffsetDecoration;
+import com.app.vik.newsfast.utils.Utility;
 
 public class FavouriteNewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -61,10 +66,24 @@ public class FavouriteNewsActivity extends AppCompatActivity implements LoaderMa
             mEmptyText.setVisibility(View.INVISIBLE);
         }
         mAdapter.swapCursor(data);
+
+        Intent intent = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
+        sendBroadcast(intent);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

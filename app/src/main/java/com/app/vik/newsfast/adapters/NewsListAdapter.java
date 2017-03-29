@@ -1,11 +1,16 @@
-package com.app.vik.newsfast;
+package com.app.vik.newsfast.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.app.vik.newsfast.NewsListActivity;
+import com.app.vik.newsfast.R;
+import com.app.vik.newsfast.pojo.Source;
 
 import java.util.ArrayList;
 
@@ -41,12 +46,20 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ListVi
         return mSources.size();
     }
 
-    public class ListViewHolder extends RecyclerView.ViewHolder {
+    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mNewsListTextView;
 
         public ListViewHolder(View itemView) {
             super(itemView);
             mNewsListTextView = (TextView) itemView.findViewById(R.id.list_tv);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(mContext, NewsListActivity.class);
+            intent.putExtra("source_object", mSources.get(getAdapterPosition()));
+            mContext.startActivity(intent);
         }
     }
 

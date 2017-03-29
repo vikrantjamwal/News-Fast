@@ -2,26 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginEnd="@dimen/detail_margin"
+    android:layout_marginLeft="@dimen/detail_margin"
+    android:layout_marginRight="@dimen/detail_margin"
+    android:layout_marginStart="@dimen/detail_margin"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_heading"
         android:layout_width="match_parent"
-        android:padding="16dp"
-        android:textSize="30sp"
-        android:fontFamily="sans-serif"
-        android:textColor="#fff"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp"
+        android:fontFamily="sans-serif"
+        android:padding="@dimen/general_padding"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
-        android:paddingStart="16dp"
-        android:textColor="#777"
-        android:fontFamily="sans-serif-medium"
-        android:paddingEnd="16dp"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceLarge" />
+        android:fontFamily="sans-serif-medium"
+        android:paddingEnd="@dimen/general_padding"
+        android:paddingLeft="@dimen/general_padding"
+        android:paddingRight="@dimen/general_padding"
+        android:paddingStart="@dimen/general_padding"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="#777" />
 
 </LinearLayout>
