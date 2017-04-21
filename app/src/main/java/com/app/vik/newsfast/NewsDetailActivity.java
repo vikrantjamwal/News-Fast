@@ -127,7 +127,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                 Uri uri = ContentUris.withAppendedId(NewsEntry.CONTENT_URI, primaryKey);
                 rowDeleted = getContentResolver().delete(uri, null, null);
                 if (rowDeleted != 0) {
-                    Toast.makeText(NewsDetailActivity.this, "News item removed from Favourites", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewsDetailActivity.this, getResources().getString(R.string.item_removed), Toast.LENGTH_SHORT).show();
                     isPresent = false;
                     mFab.setImageResource(R.drawable.ic_favorite_border_white_24dp);
                 }
@@ -135,7 +135,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                 if (mValues != null) {
                     Uri rowId = getContentResolver().insert(NewsEntry.CONTENT_URI, mValues);
                     if (ContentUris.parseId(rowId) != -1) {
-                        Toast.makeText(NewsDetailActivity.this, "News item added to Favourites", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NewsDetailActivity.this, getResources().getString(R.string.item_added), Toast.LENGTH_SHORT).show();
                         isPresent = true;
                         primaryKey = ContentUris.parseId(rowId);
                         mFab.setImageResource(R.drawable.ic_favorite_white_24dp);

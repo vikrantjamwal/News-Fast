@@ -19,4 +19,11 @@
     <string name="cnn">CNN</string>
     <string name="newsweek">Newsweek</string>
     <string name="time">Time</string>
+    <string name="favourite">Favourite</string>
+
+    <string name="connection_error">Could Not Connect To Server! Please Try Again</string>
+    <string name="item_removed">News item removed from Favourites</string>
+    <string name="item_added">News item added to Favourites</string>
+
+
 </resources>

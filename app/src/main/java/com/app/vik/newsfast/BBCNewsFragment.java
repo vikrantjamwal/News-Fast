@@ -99,7 +99,7 @@ public class BBCNewsFragment extends Fragment {
             public void onFailure(Call<Result> call, Throwable t) {
                 if (isAdded()) {
                     mProgressBar.setVisibility(View.GONE);
-                    Toast.makeText(getActivity(), "Couldn't Connect To Server! Please Try Again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
                 }
             }
         });

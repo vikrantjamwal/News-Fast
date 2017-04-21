@@ -98,7 +98,7 @@ public class NewsListActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
                 mProgressBar.setVisibility(View.GONE);
-                Toast.makeText(NewsListActivity.this, "Couldn't Connect To Server! Please Try Again", Toast.LENGTH_LONG).show();
+                Toast.makeText(NewsListActivity.this, getResources().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
             }
         });
     }
