@@ -12,6 +12,7 @@ A news app which provides news from all the major news agencies in the world.
 * Short news clippings
 * Save articles locally
 * Top headlines from each source
+* News from every corner of the world
 
 ### Libraries
 * [Glide]
@@ -19,7 +20,11 @@ A news app which provides news from all the major news agencies in the world.
 * [Gson]
 * [Retrofit]
 
+### Api
+This app uses the api provided by [newsapi.org].
+
 [Glide]:https://github.com/bumptech/glide
 [OkHttp]:http://square.github.io/okhttp/
 [Gson]:https://github.com/google/gson
 [Retrofit]:https://github.com/square/retrofit
+[newsapi.org]:https://newsapi.org/
